@@ -1,1 +1,12 @@
-pip install numpy pandas scikit-learn matplotlib seaborn xgboost shap jupyter
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+xgboost
+shap
+joblib
+jupyter
+pyarrow
+fastparquet
+scapy
