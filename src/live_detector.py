@@ -76,4 +76,4 @@ def process_packet(packet):
 # ===============================
 print("🟢 Listening on Ethernet interface...")
 
-sniff(prn=process_packet, store=False ,iface="Ethernet")  # Change interface as needed
+sniff(prn=process_packet, store=False)  # Change interface as needed
