@@ -1,22 +1,23 @@
-🛡️ SentinelNet – AI Powered Network Intrusion Detection System
+# 🛡️ SentinelNet – AI Powered Network Intrusion Detection System
 
-SentinelNet is a Machine Learning–based Network Intrusion Detection System (NIDS) that detects malicious network traffic in real time.
-It combines offline model training with live packet capture to classify network flows as Benign or Attack.
-
-
-🚀 Features
-
-✅ Real-time network traffic monitoring using packet capture
-✅ Machine learning–based intrusion detection
-✅ Binary classification: Benign vs Attack
-✅ High accuracy (~99%) using XGBoost
-✅ Feature importance & explainability
-✅ Modular project structure
-✅ Live detection with console alerts
+SentinelNet is a Machine Learning–based Network Intrusion Detection System (NIDS) that detects malicious network traffic in real time.  
+It combines offline model training with live packet capture to classify network flows as Benign or Attack.  
 
 
-📂 Project Structure
+## 🚀 Features
 
+- ✅ Real-time network traffic monitoring using packet capture
+- ✅ Machine learning–based intrusion detection
+- ✅ Binary classification: Benign vs Attack
+- ✅ High accuracy (~99%) using XGBoost
+- ✅ Feature importance & explainability
+- ✅ Modular project structure
+- ✅ Live detection with console alerts
+
+
+### 📂 Project Structure
+
+```folder
 SentinelNet-NIDS/
 │
 ├── data/
@@ -39,124 +40,138 @@ SentinelNet-NIDS/
 │
 ├── requirements.txt
 └── README.md
+```
 
 
-📊 Dataset
+### 📊 Dataset
 
-Dataset: CICIDS2017
-Records: 2.3+ million network flows
-Features: 78 network flow features
-Attack Types:
-DDoS
-DoS (Hulk, Slowloris, GoldenEye)
-Brute Force (FTP / SSH)
-Port Scan
-Web Attacks
-
-
-🧠 Machine Learning Models
-
-🌲 Random Forest – Baseline model
-⚡ XGBoost – High‑performance optimized model
+Dataset: CICIDS2017  
+Records: 2.3+ million network flows  
+Features: 78 network flow features  
+Attack Types:  
+- DDoS
+- DoS (Hulk, Slowloris, GoldenEye)
+- Brute Force (FTP / SSH)
+- Port Scan
+- Web Attacks
 
 
-Performance:
+## 🧠 Machine Learning Models
 
-Accuracy ≈ 99%
-High precision and recall for attack detection
-Low false positives and false negatives
-
-
-🛠️ Tech Stack
-
-Programming: Python
-Data Processing: Pandas, NumPy
-Machine Learning: Scikit-learn, XGBoost
-Visualization: Matplotlib, Seaborn
-Explainability: SHAP
-Network Capture: Scapy, Npcap
-Model Saving: Joblib
-Development: Jupyter Notebook, VS Code, Git
+🌲 Random Forest – Baseline model  
+⚡ XGBoost – High‑performance optimized model  
 
 
-⚙️ Installation
+### Performance:
+
+Accuracy ≈ 99%  
+High precision and recall for attack detection  
+Low false positives and false negatives  
+
+
+# 🛠️ Tech Stack
+
+Programming: Python  
+Data Processing: Pandas, NumPy  
+Machine Learning: Scikit-learn, XGBoost  
+Visualization: Matplotlib, Seaborn  
+Explainability: SHAP  
+Network Capture: Scapy, Npcap  
+Model Saving: Joblib  
+Development: Jupyter Notebook, VS Code, Git  
+
+
+## ⚙️ Installation
 
 1️⃣ Clone Repository
 
-git clone <your-repository-url>
+```bash
+git clone [<your-repository-url>](https://github.com/aIxart-sjv/SentinelNet-NIDS)
 cd SentinelNet-NIDS
+```
 
 2️⃣ Install Dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-3️⃣ (Windows Only) Install Npcap
+3️⃣ (Windows Only) Install Npcap  
 
-Npcap is required for live packet capture.
+Npcap is required for live packet capture.  
 
-Download from:
-👉 https://npcap.com
+Download from:  
+👉 [https://npcap.com](https://npcap.com)
 
 During installation:
-✔ Enable WinPcap compatibility mode
-✔ Restart your system
+- ✔ Enable WinPcap compatibility mode
+- ✔ Restart your system  
 
-▶️ Running the Project
+## ▶️ Running the Project
+
 ✅ Run Offline Detection (From Dataset)
+
+```bash
 cd src
 python run_detector.py
 This loads a dataset file and predicts whether flows are benign or malicious.
+```
 
-🌐 Run Live Intrusion Detection
-Run terminal as Administrator
+## 🌐 Run Live Intrusion Detection
 
+Run terminal as Administrator  
+
+```bash
 cd src
 python live_detector.py
-Now generate traffic:
+```
 
-Open websites
-Run ping commands
-Download files
-You will see real-time output like:
+### Now generate traffic:
 
+Open websites  
+Run ping commands  
+Download files  
+You will see real-time output like:  
+
+```log
 [LIVE] Flow 12: ✅ BENIGN
 [LIVE] Flow 13: 🚨 ATTACK DETECTED
+```
 
-📈 Model Training
+## 📈 Model Training
+ 
+Training and evaluation are performed in Jupyter notebooks located in:  
 
-Training and evaluation are performed in Jupyter notebooks located in:
+notebooks/  
 
-notebooks/
+### Steps include:
+- Data cleaning
+- Feature scaling
+- Train-test split
+- Model training
+- Evaluation
+- Feature importance & SHAP analysis
 
-Steps include:
+## ⚠️ Limitations
 
-Data cleaning
-Feature scaling
-Train-test split
-Model training
-Evaluation
-Feature importance & SHAP analysis
+Live detection uses simplified features for demonstration.  
+Full CIC feature extraction in real time is computationally expensive.  
+Encrypted traffic limits packet visibility.  
+High-speed networks require stronger hardware.  
 
-⚠️ Limitations
+# 🚀 Future Enhancements
 
-Live detection uses simplified features for demonstration.
-Full CIC feature extraction in real time is computationally expensive.
-Encrypted traffic limits packet visibility.
-High-speed networks require stronger hardware.
+Multi-class attack classification  
+Real-time dashboard visualization  
+Automatic blocking of malicious IPs  
+Deep learning models (LSTM, Autoencoders)  
+Cloud deployment  
 
-🚀 Future Enhancements
+# 👨‍💻 Authors
 
-Multi-class attack classification
-Real-time dashboard visualization
-Automatic blocking of malicious IPs
-Deep learning models (LSTM, Autoencoders)
-Cloud deployment
+Sitti Jaivardhan  
+Vijaya Bhaskar K P  
 
-👨‍💻 Authors
+# 📜 License
 
-Sitti Jaivardhan
-Vijaya Bhaskar K P
-
-📜 License
-
-This project is for academic and research purposes.
+This project is for academic and research purposes.  
