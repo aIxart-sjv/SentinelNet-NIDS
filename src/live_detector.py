@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 # ===============================
-# Load trained model and scaler
+# Load model
 # ===============================
 model = joblib.load("../models/xgboost.pkl")
 scaler = joblib.load("../models/scaler.pkl")
@@ -32,12 +32,10 @@ def extract_features(packet):
         return None
 
     ip = packet[IP]
-    proto = ip.proto
-    length = len(packet)
 
     features = [
-        proto,
-        length,
+        ip.proto,
+        len(packet),
         packet.time % 1000,
         int(TCP in packet),
     ]
@@ -66,7 +64,7 @@ def process_packet(packet):
     else:
         print("✅ Normal traffic")
 
-    # Log to CSV for dashboard
+    # Save to CSV
     with open(LOG_FILE, "a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([datetime.now(), label])
@@ -74,6 +72,9 @@ def process_packet(packet):
 # ===============================
 # Start sniffing
 # ===============================
-print("🟢 Listening on Ethernet interface...")
+print("🟢 Listening...")
 
-sniff(prn=process_packet, store=False)  # Change interface as needed
+sniff(
+    prn=process_packet,
+    store=False,
+)
