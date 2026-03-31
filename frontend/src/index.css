@@ -3,7 +3,23 @@
 @tailwind utilities;
 
 body {
-  background-color: black;
-  color: #00ff9f;
-  font-family: monospace;
+  background-color: #0b0f14;
+  color: #d1d5db;
+  font-family: system-ui, monospace;
+}
+
+/* Panel look */
+.panel {
+  background: #11161c;
+  border: 1px solid #2a2f36;
+  border-radius: 6px;
+}
+
+/* Panel header */
+.panel-header {
+  font-size: 12px;
+  color: #9ca3af;
+  border-bottom: 1px solid #2a2f36;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
 }
