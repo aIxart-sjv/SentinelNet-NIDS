@@ -91,7 +91,14 @@ def process_packet(packet):
     else:
         print("✅ Normal traffic")
 
-    # Log to CSV for dashboard
+    # Store in memory
+    logs.append(log_entry)
+
+    # Limit memory (IMPORTANT)
+    if len(logs) > 1000:
+        logs.pop(0)
+
+    # Save to CSV (backup)
     with open(LOG_FILE, "a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([log_entry["timestamp"], label])
@@ -106,6 +113,17 @@ def start_sniffing():
 # ===============================
 # API endpoint
 # ===============================
-print("🟢 Listening on Ethernet interface...")
+@app.get("/api/logs")
+def get_logs():
+    return logs[-200:]  # return latest 200 logs
 
-sniff(prn=process_packet, store=False)  # Change interface as needed
+# ===============================
+# Run everything together
+# ===============================
+if __name__ == "__main__":
+    # Start packet sniffing in background
+    thread = threading.Thread(target=start_sniffing, daemon=True)
+    thread.start()
+
+    # Start API server
+    uvicorn.run(app, host="0.0.0.0", port=8000)
