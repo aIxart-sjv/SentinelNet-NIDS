@@ -4,6 +4,11 @@ from scapy.all import sniff, IP, TCP
 import joblib
 import numpy as np
 import os
+import threading
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 
 # ===============================
 # Load model
@@ -14,7 +19,24 @@ scaler = joblib.load("../models/scaler.pkl")
 print("🚀 SentinelNet LIVE IDS Started...")
 
 # ===============================
-# Log file setup
+# FastAPI setup
+# ===============================
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ===============================
+# In-memory storage (IMPORTANT)
+# ===============================
+logs = []
+
+# ===============================
+# CSV backup (optional now)
 # ===============================
 LOG_FILE = "../results/live_logs.csv"
 os.makedirs("../results", exist_ok=True)
@@ -58,23 +80,32 @@ def process_packet(packet):
 
     label = "ATTACK" if prediction == 1 else "BENIGN"
 
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "prediction": label
+    }
+
     # Console output
     if label == "ATTACK":
         print("🚨 ATTACK DETECTED!")
     else:
         print("✅ Normal traffic")
 
-    # Save to CSV
+    # Log to CSV for dashboard
     with open(LOG_FILE, "a", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([datetime.now(), label])
+        writer.writerow([log_entry["timestamp"], label])
 
 # ===============================
-# Start sniffing
+# Sniffer thread
 # ===============================
-print("🟢 Listening...")
+def start_sniffing():
+    print("🟢 Listening for packets...")
+    sniff(prn=process_packet, store=False)
 
-sniff(
-    prn=process_packet,
-    store=False,
-)
+# ===============================
+# API endpoint
+# ===============================
+print("🟢 Listening on Ethernet interface...")
+
+sniff(prn=process_packet, store=False)  # Change interface as needed

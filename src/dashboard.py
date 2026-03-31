@@ -5,7 +5,11 @@ import os
 # ===============================
 # Config
 # ===============================
+<<<<<<< HEAD
 LOG_FILE = "../results/live_logs.csv"
+=======
+LOG_FILE = "results/live_logs.csv"
+>>>>>>> 6e30be6 (did somekinda degrade need to be fixed)
 
 st.set_page_config(page_title="SentinelNet IDS", layout="wide")
 
@@ -75,4 +79,8 @@ st.dataframe(df.tail(15), use_container_width=True)
 st.caption("🔄 Auto-refreshing every 2 seconds")
 
 from streamlit_autorefresh import st_autorefresh
+<<<<<<< HEAD
 st_autorefresh(interval=2000, key="refresh")
+=======
+st_autorefresh(interval=2000, key="refresh")
+>>>>>>> 6e30be6 (did somekinda degrade need to be fixed)
